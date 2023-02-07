@@ -41,15 +41,6 @@ def index():
 def stub():
     return render_template("stub.html")
 
-@app.route('/cars/')  
-def car():
-    url = "http://127.0.0.1:8091/api/cars/"
-
-    response = requests.request("GET", url)
-
-    output = response.json()
-    return render_template("cars.html", cars=output)
-
 
 @app.before_first_request
 def activate_job():
