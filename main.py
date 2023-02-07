@@ -52,4 +52,4 @@ def activate_job():
 if __name__ == "__main__":
     # change name for testing
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///volumes/sqlite.db'
-    app.run(debug=True, host="127.0.0.1", port="8091")
+    app.run(debug=True, host="127.0.0.1", port="8092")
