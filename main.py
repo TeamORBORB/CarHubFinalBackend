@@ -11,15 +11,12 @@ from model.cars import initCars
 
 # setup APIs
 from api.user import user_api # Blueprint import api definition
-from api.years import years_api
-from api.makes import makes_api
 from api.car import cars_api
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(user_api) # register api routes
-app.register_blueprint(years_api) # register api routes
-app.register_blueprint(makes_api)
+
 app.register_blueprint(cars_api)
 
 @app.errorhandler(404)  # catch for URL not found
@@ -63,7 +60,5 @@ def activate_job():
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    from flask_cors import CORS
-    cors = CORS(app)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///volumes/sqlite.db'
     app.run(debug=True, host="127.0.0.1", port="8091")
