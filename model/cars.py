@@ -128,6 +128,6 @@ def initCars():
         except IntegrityError:
             '''fails with bad or duplicate data'''
             db.session.remove()
-            print(f"Records exist, duplicate email, or error: {car.id}")
+            print(f"Records exist, duplicate car, or error: {car.id}")
             
             
