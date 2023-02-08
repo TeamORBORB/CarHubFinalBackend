@@ -16,7 +16,6 @@ from api.car import cars_api
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(user_api) # register api routes
-
 app.register_blueprint(cars_api)
 
 @app.errorhandler(404)  # catch for URL not found
@@ -28,25 +27,15 @@ def page_not_found(e):
 def index():
     return render_template("index.html")
 
-# @app.route('/carID/<int:id>')
-# def car_ID(id):
-#     # Make a GET request to the car ID API endpoint, allowing the data of a specific car to be retrieved
-#     response = requests.get(f'http://192.168.1.23:8049/api/cars/car/{id}')
-#     # Parse the JSON response
-#     car_data = response.json()
-#     # Render the car ID in a template
 
+@app.route('/cars/')  
+def car():
+    url = "http://127.0.0.1:8092/api/cars/"
 
-@app.route('/stub/')  # connects /stub/ URL to stub() function
-def stub():
-    return render_template("stub.html")
+    response = requests.request("GET", url)
 
-
-@app.before_first_request
-def activate_job():
-    initJokes()
-    initUsers()
-    initCars()
+    output = response.json()
+    return render_template("cars.html", cars=output)
 
 # this runs the application on the development server
 if __name__ == "__main__":
