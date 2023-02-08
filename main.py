@@ -30,7 +30,7 @@ def index():
 
 @app.route('/cars/')  
 def car():
-    url = "http://127.0.0.1:8092/api/cars/"
+    url = "http://3.130.255.192/cars/"
 
     response = requests.request("GET", url)
 
