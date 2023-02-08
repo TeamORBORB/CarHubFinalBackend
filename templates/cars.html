@@ -4,7 +4,7 @@
 </head>
 <body>
     <h1>Cars</h1>
-    <h2>Flask-Cars</h2>
+    <h2>Liquid-Cars</h2>
     <table>
         <thead>
             <tr>
@@ -43,7 +43,7 @@
        <script>
         const resultContainer = document.getElementById("result");
       
-        const url = "http://3.130.255.192/cars/api";
+        const url = "http://127.0.0.1:8086/api/cars";
         const headers = {
           method: 'GET',
           mode: 'cors',
@@ -54,10 +54,10 @@
           },
         };
      
-        // Fetch the database
+        // Fetch data from the database
         fetch(url, headers)
           .then(response => {
-            if (response.status !== 200) {
+            if (response.status != 200) {
                 const errorMsg = 'Database response error: ' + response.status;
                 console.log(errorMsg);
                 const tr = document.createElement("tr");
@@ -67,11 +67,13 @@
                 resultContainer.appendChild(tr);
                 return;
             }
-            // Jsonify the response! Legible data!
+            // Parse the json and add it to the webpage
             response.json().then(data => {
                 console.log(data);      
+
+                // adding a new row for each car from each json node
                 for (const row of data) {
-      
+                  
                   const tr = document.createElement("tr");
                   const make = document.createElement("td");
                   const model = document.createElement("td");
