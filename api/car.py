@@ -11,6 +11,7 @@ cars_api = Blueprint('cars_api', __name__ ,
 # API instance from flask_restful
 api = Api(cars_api)
 
+# Post method
 class CarsAPI:        
     class _Create(Resource):
         def post(self):
