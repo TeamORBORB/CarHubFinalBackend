@@ -47,6 +47,7 @@ class CarsAPI:
         def get(self):
             cars = Car.query.all()    # read/extract all users from database
             json_ready = [info.read() for info in cars]  # prepare output in json
+        
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
     # building RESTapi endpoint
