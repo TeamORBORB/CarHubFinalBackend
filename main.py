@@ -37,6 +37,10 @@ def car():
     output = response.json()
     return render_template("cars.html", cars=output)
 
+@app.before_first_request
+def activate_job():
+    initCars()
+
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing

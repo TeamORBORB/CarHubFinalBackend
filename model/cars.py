@@ -11,13 +11,15 @@ class Car(db.Model):
     _model = db.Column(db.String(255), nullable=False, unique = False)
     _price = db.Column(db.Integer, nullable=False, unique = False)
     _year = db.Column(db.Integer, nullable=False, unique = False)
+    _likes = db.Column(db.Integer, nullable=False, unique = False)
 
-    def __init__(self, make, model, price, year):
+    def __init__(self, make, model, price, year, likes):
         # Adding instance attributes
         self._make = make
         self._model = model
         self._price = price
         self._year = year
+        self._likes = likes
 
     # Add getters and setters for make, model, price, year
     @property
@@ -51,13 +53,21 @@ class Car(db.Model):
     @year.setter
     def year(self, year):
         self._year = year
-
+    
+    @property
+    def likes(self):
+        return self._likes
+    
+    @likes.setter
+    def likes(self, likes):
+        likes._year = likes
     def dictionary(self):
         dict = {
             "make" : self.make,
             "model" : self.model,
             "price" : self.price,
             "year" : self.year,
+            "likes" : self.likes
         }
         return dict 
 
@@ -82,12 +92,13 @@ class Car(db.Model):
             "make" : self.make,
             "model" : self.model,
             "price" : self.price,
-            "year" : self.year
+            "year" : self.year,
+            "likes" : self.likes
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, make="", model="", price="", year=""):
+    def update(self, make="", model="", price="", year="", likes=""):
         """only updates values with length"""
         if len(make) > 0:
             self.make = make
@@ -97,8 +108,10 @@ class Car(db.Model):
             self.price(price)
         if year > 0:
             self.year(year)
+        if likes >= 0:
+            self.likes(likes)
         db.session.commit()
-        return self
+        return self  
 
     # CRUD delete: remove self
     # None
@@ -112,11 +125,11 @@ def initCars():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    car1 = Car(make="Lexus", model="IS 500", price=58000, year=2022)
-    car2 = Car(make="Toyota", model="GR Supra 2.0", price=44000, year=2022)
-    car3 = Car(make="BMW", model="I8", price=105000, year=2016)
-    car4 = Car(make="Hyundai", model="Veloster N", price=30000, year=2021)
-    car5 = Car(make="Mercury", model="Marauder", price=25000, year=2004)
+    car1 = Car(make="Lexus", model="IS 500", price=58000, year=2022, likes = 1)
+    car2 = Car(make="Toyota", model="GR Supra 2.0", price=44000, year=2022, likes = 0)
+    car3 = Car(make="BMW", model="I8", price=105000, year=2016, likes = 0)
+    car4 = Car(make="Hyundai", model="Veloster N", price=30000, year=2021, likes = 0)
+    car5 = Car(make="Mercury", model="Marauder", price=25000, year=2004, likes = 0)
 
 
     cars = [car1, car2, car3, car4, car5]
