@@ -21,6 +21,7 @@
                 <td>{{ car.model }}</td>
                 <td>{{ car.year }}</td>
                 <td>{{ car.price }}</td>
+                <td>{{ car.likes }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -34,6 +35,7 @@
             <th>Model</th>
             <th>Year</th>
             <th>Price</th>
+            <th>Likes</th>
         </tr>
         </thead>
         <tbody id="result">
@@ -79,7 +81,7 @@
                   const model = document.createElement("td");
                   const year = document.createElement("td");
                   const price = document.createElement("td");
-      
+
                   make.innerHTML = row.make;
                   model.innerHTML = row.model; 
                   year.innerHTML = row.year; 
@@ -89,7 +91,12 @@
                   tr.appendChild(model);
                   tr.appendChild(year);
                   tr.appendChild(price);
-      
+
+                  // if (likes == 1) {
+                  //   const likes = document.createElement("td");
+                  //   tr.appendChild(likes);
+                  //   return;
+                  // }      
                   resultContainer.appendChild(tr);
                 }
             })

@@ -122,25 +122,28 @@ class Car(db.Model):
 
 # Function based off of users.py
 def initCars():
-    """Create database and tables"""
-    db.create_all()
-    """Tester data for table"""
-    car1 = Car(make="Lexus", model="IS 500", price=58000, year=2022, likes = 1)
-    car2 = Car(make="Toyota", model="GR Supra 2.0", price=44000, year=2022, likes = 0)
-    car3 = Car(make="BMW", model="I8", price=105000, year=2016, likes = 0)
-    car4 = Car(make="Hyundai", model="Veloster N", price=30000, year=2021, likes = 0)
-    car5 = Car(make="Mercury", model="Marauder", price=25000, year=2004, likes = 0)
+    with app.app_context():
+        """Create database and tables"""
+        db.init_app(app)
+        db.create_all()
+
+        """Tester data for table"""
+        car1 = Car(make="Lexus", model="IS 500", price=58000, year=2022, likes = 1)
+        car2 = Car(make="Toyota", model="GR Supra 2.0", price=44000, year=2022, likes = 0)
+        car3 = Car(make="BMW", model="I8", price=105000, year=2016, likes = 0)
+        car4 = Car(make="Hyundai", model="Veloster N", price=30000, year=2021, likes = 0)
+        car5 = Car(make="Mercury", model="Marauder", price=25000, year=2004, likes = 0)
 
 
-    cars = [car1, car2, car3, car4, car5]
+        cars = [car1, car2, car3, car4, car5]
 
-    """Builds sample user/note(s) data"""
-    for car in cars:
-        try:
-            car.create()
-        except IntegrityError:
-            '''fails with bad or duplicate data'''
-            db.session.remove()
-            print(f"Records exist, duplicate car, or error: {car.id}")
-            
+        """Builds sample user/note(s) data"""
+        for car in cars:
+            try:
+                car.create()
+            except IntegrityError:
+                '''fails with bad or duplicate data'''
+                db.session.remove()
+                print(f"Records exist, duplicate car, or error: {car.id}")
+                
             
