@@ -120,7 +120,7 @@ class Car(db.Model):
         db.session.commit()
         return None
 
-# Function based off of users.py
+# Function to initialize the Cars
 def initCars():
     with app.app_context():
         """Create database and tables"""
@@ -146,4 +146,3 @@ def initCars():
                 db.session.remove()
                 print(f"Records exist, duplicate car, or error: {car.id}")
                 
-            
