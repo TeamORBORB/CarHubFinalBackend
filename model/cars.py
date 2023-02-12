@@ -128,14 +128,65 @@ def initCars():
         db.create_all()
 
         """Tester data for table"""
-        car1 = Car(make="Lexus", model="IS 500", price=58000, year=2022, likes = 1)
-        car2 = Car(make="Toyota", model="GR Supra 2.0", price=44000, year=2022, likes = 0)
-        car3 = Car(make="BMW", model="I8", price=105000, year=2016, likes = 0)
-        car4 = Car(make="Hyundai", model="Veloster N", price=30000, year=2021, likes = 0)
-        car5 = Car(make="Mercury", model="Marauder", price=25000, year=2004, likes = 0)
+        car1 = Car(make="BMW", model="2 Series", price=34000, year=2021, likes = 0)
+        car2 = Car(make="BMW", model="3 Series", price=41000, year=2021, likes = 0)
+        car3 = Car(make="BMW", model="4 Series", price=51000, year=2021, likes = 0)
+        car4 = Car(make="BMW", model="5 Series", price=54000, year=2021, likes = 0)
+        car5 = Car(make="BMW", model="7 Series", price=83000, year=2021, likes = 0)
+        car6 = Car(make="BMW", model="X1", price=35000, year=2021, likes = 0)
+        car7 = Car(make="BMW", model="X2", price=40000, year=2021, likes = 0)
+        car8 = Car(make="BMW", model="X3", price=44000, year=2021, likes = 0)
+        car9 = Car(make="BMW", model="X4", price=50000, year=2021, likes = 0)
+        car10 = Car(make="BMW", model="X5", price=56000, year=2021, likes = 0)
+        car11 = Car(make="BMW", model="X6", price=64000, year=2021, likes = 0)
+        car12 = Car(make="BMW", model="Z4", price=50000, year=2021, likes = 0)
+        car20 = Car(make="Mercedes-Benz", model="A-Class", price=34000, year=2021, likes = 0)
+        car21 = Car(make="Mercedes-Benz", model="C-Class", price=45000, year=2021, likes = 0)
+        car22 = Car(make="Mercedes-Benz", model="E-Class", price=54000, year=2021, likes = 0)
+        car23 = Car(make="Mercedes-Benz", model="S-Class", price=90000, year=2021, likes = 0)
+        car24 = Car(make="Mercedes-Benz", model="GLE-Class", price=54000, year=2021, likes = 0)
+        car25 = Car(make="Mercedes-Benz", model="GLC-Class", price=48000, year=2021, likes = 0)
+        car26 = Car(make="Tesla", model="Model 3", price=38000, year=2021, likes = 0)
+        car27 = Car(make="Tesla", model="Model S", price=79000, year=2021, likes = 0)
+        car28 = Car(make="Tesla", model="Model X", price=88000, year=2021, likes = 0)
+        car29 = Car(make="Tesla", model="Model Y", price=41000, year=2021, likes = 0)
+        car30 = Car(make="Jaguar", model="F-PACE", price=45000, year=2021, likes = 0)
+        car31 = Car(make="Jaguar", model="I-PACE", price=70000, year=2021, likes = 0)
+        car32 = Car(make="Jaguar", model="E-PACE", price=40000, year=2021, likes = 0)
+        car33 = Car(make="Jaguar", model="XE", price=45000, year=2021, likes = 0)
+        car34 = Car(make="Jaguar", model="XF", price=52000, year=2021, likes = 0)
+        car35 = Car(make="Land Rover", model="Range Rover Evoque", price=45000, year=2021, likes = 0)
+        car36 = Car(make="Land Rover", model="Range Rover Sport", price=65000, year=2021, likes = 0)
+        car37 = Car(make="Land Rover", model="Range Rover", price=85000, year=2021, likes = 0)
+        car38 = Car(make="Land Rover", model="Discovery Sport", price=41000, year=2021, likes = 0)
+        car39 = Car(make="Land Rover", model="Discovery", price=52000, year=2021, likes = 0)
+        car40 = Car(make="Toyota", model="Corolla", price=19000, year=2021, likes = 0)
+        car41 = Car(make="Toyota", model="Camry", price=24000, year=2021, likes = 0)
+        car42 = Car(make="Toyota", model="Avalon", price=34000, year=2021, likes = 0)
+        car43 = Car(make="Toyota", model="RAV4", price=25000, year=2021, likes = 0)
+        car44 = Car(make="Toyota", model="Highlander", price=35000, year=2021, likes = 0)
+        car45 = Car(make="Honda", model="Accord", price=24000, year=2021, likes = 0)
+        car46 = Car(make="Honda", model="Civic", price=19000, year=2021, likes = 0)
+        car47 = Car(make="Honda", model="CR-V", price=25000, year=2021, likes = 0)
+        car48 = Car(make="Honda", model="Pilot", price=35000, year=2021, likes = 0)
+        car49 = Car(make="Honda", model="Odyssey", price=30000, year=2021, likes = 0)
+        car50 = Car(make="Kia", model="Soul", price=16000, year=2021, likes = 0)
+        car51 = Car(make="Kia", model="Sorento", price=30000, year=2021, likes = 0)
+        car52 = Car(make="Kia", model="Optima", price=24000, year=2021, likes = 0)
+        car53 = Car(make="Kia", model="Niro", price=28000, year=2021, likes = 0)
+        car54 = Car(make="Kia", model="Sportage", price=27000, year=2021, likes = 0)
+        car55 = Car(make="Mazda", model="3", price=22000, year=2021, likes = 0)
+        car56 = Car(make="Mazda", model="6", price=28000, year=2021, likes = 0)
+        car57 = Car(make="Mazda", model="CX-5", price=30000, year=2021, likes = 0)
+        car58 = Car(make="Mazda", model="CX-9", price=48000, year=2021, likes = 0)
+        car59 = Car(make="Mazda", model="MX-5", price=35000, year=2021, likes = 0)
 
-
-        cars = [car1, car2, car3, car4, car5]
+        cars = [car1, car2, car3, car4, car5, car6, car7, car8, car9, car10,
+        car11, car12, car20,
+        car21, car22, car23, car24, car25, car26, car27, car28, car29, car30,
+        car31, car32, car33, car34, car35, car36, car37, car38, car39, car40,
+        car41, car42, car43, car44, car45, car46, car47, car48, car49, car50,
+        car51, car52, car53, car54, car55, car56, car57, car58, car59]
 
         """Builds sample user/note(s) data"""
         for car in cars:
