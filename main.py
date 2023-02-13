@@ -41,9 +41,59 @@ def car():
 def activate_job():
     initCars()
 
+from flask import Flask, request, jsonify, render_template
+import sqlite3
+
+@app.route('/comments')
+def handle_comments():
+    comments = fetch_comments()
+    return render_template("comments.html", comments=comments)
+
+@app.route('/comments', methods=['GET', 'POST'])
+def handle_comments_post_get():
+    if request.method == 'GET':
+        comments = fetch_comments()
+        return jsonify(comments)
+    if request.method == 'POST':
+        username = request.form['username']
+        comment = request.form['comment']
+        insert_comment(username, comment)
+        return "Comment added successfully", 201
+
+def init_db():
+    conn = sqlite3.connect('comments.db')
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS comments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            comment TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+def fetch_comments():
+    conn = sqlite3.connect('comments.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM comments')
+    comments = c.fetchall()
+    conn.close()
+    return comments
+
+def insert_comment(username, comment):
+    conn = sqlite3.connect('comments.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO comments (username, comment) VALUES (?, ?)", (username, comment))
+    conn.commit()
+    conn.close()
+
+
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    from flask_cors import CORS
-    cors = CORS(app)
+    init_db()
+    #from flask_cors import CORS
+    #cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")

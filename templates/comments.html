@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All comments</title>
+</head>
+<body>
+  <h1>All comments:</h1>
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment[1] }}: {{ comment[2] }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
