@@ -37,8 +37,16 @@ class CarsAPI:
             likes = body.get('likes')
             if likes is None:
                 return {'message': f'Year is missing, or is less than 1 character'}, 210
-        
-            car = Car(make=make, model=model, price=price, year=year, likes=likes)
+            # validate body style
+            body_style = body.get('body_style')
+            if body_style is None:
+                return {'message': f'Year is missing, or is less than 1 character'}, 210
+            # validate engine
+            engine = engine.get('engine')
+            if engine is None:
+                return {'message': f'Year is missing, or is less than 1 character'}, 210
+                    
+            car = Car(make=make, model=model, price=price, year=year, likes=likes, body_style=body_style, engine=engine)
             
             # creates the info in the database
             info = car.create()
