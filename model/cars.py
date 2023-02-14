@@ -127,7 +127,7 @@ def initCars():
         db.init_app(app)
         db.create_all()
 
-        """Tester data for table"""
+        """Data for table"""
         car1 = Car(make="BMW", model="2 Series", price=34000, year=2021, likes = 0)
         car2 = Car(make="BMW", model="3 Series", price=41000, year=2021, likes = 0)
         car3 = Car(make="BMW", model="4 Series", price=51000, year=2021, likes = 0)
