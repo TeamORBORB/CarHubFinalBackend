@@ -5,15 +5,13 @@
 </head>
 <body>
   <h1>All comments:</h1>
-  <ul id="comments"></ul>
+  <ul>
+    {% for comment in comments %}
+      <li>{{ comment[1] }}: {{ comment[2] }}</li>
+    {% endfor %}
+  </ul>
   <script>
-    const commentsDiv = document.querySelector('#comments');
-    const comments = {{ comments|tojson|safe }};
-    comments.forEach(comment => {
-      commentsDiv.innerHTML += `
-        <li>${comment[1]}: ${comment[2]}</li>
-      `;
-    });
+    window.comments = {{ comments|tojson|safe }};
   </script>
 </body>
 </html>
