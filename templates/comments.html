@@ -10,5 +10,8 @@
       <li>{{ comment[1] }}: {{ comment[2] }}</li>
     {% endfor %}
   </ul>
+  <script>
+    window.comments = {{ comments|tojson|safe }};
+  </script>
 </body>
 </html>
