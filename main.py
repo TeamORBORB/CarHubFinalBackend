@@ -46,19 +46,19 @@ import sqlite3
 
 @app.route('/comments')
 def handle_comments():
-    comments = fetch_comments()
-    return render_template("comments.html", comments=comments)
-
-@app.route('/comments', methods=['GET', 'POST'])
-def handle_comments_post_get():
-    if request.method == 'GET':
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         comments = fetch_comments()
         return jsonify(comments)
-    if request.method == 'POST':
-        username = request.form['username']
-        comment = request.form['comment']
-        insert_comment(username, comment)
-        return "Comment added successfully", 201
+    else:
+        comments = fetch_comments()
+        return render_template("comments.html", comments=comments)
+
+@app.route('/comments', methods=['POST'])
+def handle_comments_post():
+    username = request.form['username']
+    comment = request.form['comment']
+    insert_comment(username, comment)
+    return "Comment added successfully", 201
 
 def init_db():
     conn = sqlite3.connect('comments.db')
@@ -94,6 +94,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    from flask_cors import CORS
-    cors = CORS(app)
+    #from flask_cors import CORS
+    #cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
