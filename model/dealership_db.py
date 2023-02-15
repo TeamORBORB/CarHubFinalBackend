@@ -11,6 +11,10 @@ class Dealership(Base):
     latitude = Column(Float)
     longitude = Column(Float)
 
+
+    def __repr__(self):
+        return f'<name {self.name}>'
+
 engine = create_engine('sqlite:///dealerships.db')
 Base.metadata.create_all(engine)
 
