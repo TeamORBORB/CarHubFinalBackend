@@ -55,10 +55,7 @@ def handle_comments_post_get():
         insert_comment(username, comment)
         return "Comment added successfully", 201
 
-@app.route('/comments')
-def handle_comments():
-    comments = fetch_comments()
-    return render_template("comments.html", comments=comments)
+
 
 def init_db():
     conn = sqlite3.connect('comments.db')
