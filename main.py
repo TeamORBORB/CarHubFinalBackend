@@ -50,16 +50,15 @@ def handle_comments():
     return render_template("comments.html", comments=comments)
 
 @app.route('/comments', methods=['GET', 'POST'])
-def handle_comments():
+def handle_comments_post_get():
     if request.method == 'GET':
         comments = fetch_comments()
         return jsonify(comments)
-    elif request.method == 'POST':
+    if request.method == 'POST':
         username = request.form['username']
         comment = request.form['comment']
         insert_comment(username, comment)
-        comments = fetch_comments()
-        return jsonify(comments)
+        return "Comment added successfully", 201
 
 def init_db():
     conn = sqlite3.connect('comments.db')
