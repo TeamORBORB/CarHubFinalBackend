@@ -46,19 +46,20 @@ import sqlite3
 
 @app.route('/comments')
 def handle_comments():
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+    comments = fetch_comments()
+    return render_template("comments.html", comments=comments)
+
+@app.route('/comments', methods=['GET', 'POST'])
+def handle_comments():
+    if request.method == 'GET':
         comments = fetch_comments()
         return jsonify(comments)
-    else:
+    elif request.method == 'POST':
+        username = request.form['username']
+        comment = request.form['comment']
+        insert_comment(username, comment)
         comments = fetch_comments()
-        return render_template("comments.html", comments=comments)
-
-@app.route('/comments', methods=['POST'])
-def handle_comments_post():
-    username = request.form['username']
-    comment = request.form['comment']
-    insert_comment(username, comment)
-    return "Comment added successfully", 201
+        return jsonify(comments)
 
 def init_db():
     conn = sqlite3.connect('comments.db')
