@@ -94,6 +94,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    #from flask_cors import CORS
-    #cors = CORS(app)
+    from flask_cors import CORS
+    cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
