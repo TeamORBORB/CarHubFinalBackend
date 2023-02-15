@@ -41,11 +41,11 @@ def car():
 def activate_job():
     initCars()
 
-from flask import Flask, request, jsonify, 
+from flask import Flask, request, jsonify, render_template
 import sqlite3
 
 @app.route('/comments', methods=['GET', 'POST'])
-def handle_comments_post_get():
+def handle_comments():
     if request.method == 'GET':
         comments = fetch_comments()
         return jsonify(comments)
