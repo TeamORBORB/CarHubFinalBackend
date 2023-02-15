@@ -45,7 +45,7 @@ from flask import Flask, request, jsonify, render_template
 import sqlite3
 
 @app.route('/comments', methods=['GET', 'POST'])
-def handle_comments():
+def handle_comments_post_get():
     if request.method == 'GET':
         comments = fetch_comments()
         return jsonify(comments)
