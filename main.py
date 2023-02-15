@@ -41,7 +41,7 @@ def car():
 def activate_job():
     initCars()
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, 
 import sqlite3
 
 @app.route('/comments', methods=['GET', 'POST'])
