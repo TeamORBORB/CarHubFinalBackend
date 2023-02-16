@@ -5,6 +5,7 @@ from model.dealership_db import Dealership, session
 @app.route('/dealerships')
 def get_dealerships():
     dealerships = session.query(Dealership).all()
+    print(dealerships)
     
     response = []
     for d in dealerships:

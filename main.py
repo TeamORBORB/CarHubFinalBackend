@@ -4,7 +4,7 @@ import requests
 from flask import render_template  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
-from __init__ import app, db   # Definitions initialization
+from __init__ import app # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.cars import initCars
@@ -12,6 +12,11 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
+print("importing")
+import api.dealership_api
+
+from __init__ import app
+from model.dealership_db import Dealership, session
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
@@ -106,6 +111,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    # from flask_cors import CORS
-    # cors = CORS(app)
+    from flask_cors import CORS
+    cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
