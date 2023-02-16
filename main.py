@@ -12,7 +12,6 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
-print("importing")
 import api.dealership_api
 
 from __init__ import app
