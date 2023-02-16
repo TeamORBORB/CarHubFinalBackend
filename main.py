@@ -50,6 +50,15 @@ import sqlite3
 #     comments = fetch_comments()
 #     return render_template("comments.html", comments=comments)
 
+
+#delete comments
+# def delete_all_comments():
+#     conn = sqlite3.connect('comments.db')
+#     c = conn.cursor()
+#     c.execute('DELETE FROM comments')
+#     conn.commit()
+#     conn.close()
+
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
     if request.method == 'GET':
@@ -97,6 +106,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    #from flask_cors import CORS
-    #cors = CORS(app)
+    from flask_cors import CORS
+    cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
