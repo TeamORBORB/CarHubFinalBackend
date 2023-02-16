@@ -23,8 +23,7 @@ class UserAPI:
                 return {'message': f'User ID is missing, or is less than 2 characters'}, 210
 
             ''' #1: Key code block, setup USER OBJECT '''
-            uo = User(
-                      uid=uid)
+            uo = User(uid=uid)
             
             ''' #2: Key Code block to add user to database '''
             # create user in database
