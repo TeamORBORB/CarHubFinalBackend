@@ -14,11 +14,6 @@ def get_dealerships():
 
     return jsonify(response)
 
-@app.route('/dealerships/<int:dealership_id>')
-def get_dealership(dealership_id):
-    dealership = session.query(Dealership).filter_by(id=dealership_id).one()
-    return jsonify(dealership.__dict__)
-
 if __name__ == '__main__':
     app.run()
 
