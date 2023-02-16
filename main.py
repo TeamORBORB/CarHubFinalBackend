@@ -12,7 +12,6 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
-import api.dealership_api
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
@@ -49,6 +48,18 @@ def activate_job():
 from flask import Flask, request, jsonify, render_template
 import sqlite3
 
+# @app.route('/comments')
+# def handle_comments():
+#     comments = fetch_comments()
+#     return render_template("comments.html", comments=comments)
+
+# def delete_all_comments():
+#     conn = sqlite3.connect('comments.db')
+#     c = conn.cursor()
+#     c.execute('DELETE FROM comments')
+#     conn.commit()
+#     conn.close()
+
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
     if request.method == 'GET':
@@ -60,10 +71,6 @@ def handle_comments_post_get():
         insert_comment(username, comment)
         return "Comment added successfully", 201
 
-# @app.route('/comments')
-# def handle_comments():
-#     comments = fetch_comments()
-#     return render_template("comments.html", comments=comments)
 
 def init_db():
     conn = sqlite3.connect('comments.db')
@@ -99,6 +106,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    from flask_cors import CORS
-    cors = CORS(app)
+    # from flask_cors import CORS
+    # cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")

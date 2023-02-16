@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from dealership import Base, Dealership
+from dealership_db import Base, Dealership
 
 engine = create_engine('sqlite:///dealerships.db')
 Base.metadata.bind = engine

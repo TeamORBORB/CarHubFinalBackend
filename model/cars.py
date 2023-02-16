@@ -100,7 +100,7 @@ class Car(db.Model):
 
     def create(self):
         try:
-            # creates a Car object from User(db.Model) class, passes initializers
+            # creates a Car object from Car(db.Model) class, passes initializers
             db.session.add(self)  # add prepares to persist person object to Users table
             db.session.commit()  # SqlAlchemy "unit of work pattern" requires a manual commit
             return self
