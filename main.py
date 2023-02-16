@@ -12,6 +12,7 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
+import api.dealership_api
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes

@@ -154,8 +154,8 @@ class Car(db.Model):
 def initCars():
     with app.app_context():
         """Create database and tables"""
-        db.init_app(app)
-        db.create_all()
+        #db.init_app(app)
+        #db.create_all()
 
         """Data for table"""
         car1 = Car(make="BMW", model="2 Series", price=34000, year=2021, likes=0, body_style="coupe", engine="2.0L four-cylinder")
