@@ -38,6 +38,10 @@ def car():
     output = response.json()
     return render_template("cars.html", cars=output)
 
+@app.route('/dealership/')  
+def ds():
+    return render_template("ds.html")
+
 @app.before_first_request
 def activate_job():
     initCars()

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="with=device-width" , initial-scale="1.0">
+  <!--helps make the website responsive-->
+  <title>CARS</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&family=Rubik+Bubbles&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <section class="header">
+    <nav>
+      <a href="index.html"><img src="/static/assets/logo.png"></a>
+      <div class="nav-links">
+        <ul>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="inventory.html">INVENTORY</a></li>
+          <li><a href="ds.html">DEALERSHIP</a></li>
+          <li><a href="Quiz.html">QUIZ</a></li>
+          <li><a href="profile.html">PROFILE</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </section>
+  <div class="text-box">
+    <h3>YOUR LOCAL DEALERSHIPS</h3>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d13383.443500762725!2d-117.11470920128966!3d33.0074432278256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sdealerships!5e0!3m2!1sen!2sus!4v1675374477551!5m2!1sen!2sus"
+      width="1000" height="650" style="border: 5px solid rgb(255, 255, 255);" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      <div id="info-box">
+        <h2>Your location:</h2>
+        <div id="location"></div>
+
+        <h2>Closest dealership</h2>
+        <div id="dealership"></div>
+
+        <button onclick="getLocation()">Find the closest dealership!</button>
+      </div>
+  </div>
+  <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function findShortestLocation(userLocation, dealershipLocations) {
+        // Calculate the distance between the user's location and each dealership
+        let shortestDistance = Infinity
+        let nearestDealership = dealershipLocations.pop();
+
+        for(let location of dealershipLocations) {
+          let distance = calculateDistance(
+            userLocation.latitude, 
+            userLocation.longitude, 
+            location.latitude,
+            location.longitude,
+          );
+
+          if(distance < shortestDistance) {
+            nearestDealership = location;
+            shortestDistance = distance;
+          }
+        }
+
+        if(!nearestDealership) {
+          alert("couldn't find the shortest distance. Possibly due to empty dealership location list");
+        }
+
+        return nearestDealership;
+        // Determine which dealership is closer
+
+      }
+
+      function showPosition(position) {
+        document.getElementById("location").innerHTML = "Latitude: " + position.coords.latitude +
+          "<br>Longitude: " + position.coords.longitude;
+
+
+        //let locationsURL = `https://cars.nighthawkcodingsociety.com/dealerships`;
+        let locationsURL = `${location.origin}/dealerships`;
+        fetch(locationsURL).then(d => d.json()).then(dealershipLocations => {
+        // For demo purposes, let's say there are two dealerships
+        // located at the following coordinates:
+        // var dealership1 = { lat: 33.015200, lng: -117.083380 };
+        // var dealership2 = { lat: 34.0522, lng: -118.2437 };
+
+        let nearestDealership = findShortestLocation(
+          {
+            latitude: position.coords.latitude, 
+            longitude: position.coords.longitude
+          },
+          dealershipLocations
+        );
+
+        document.getElementById("dealership").innerHTML = `
+          The nearest dealership is located at:<br />
+          Name: ${nearestDealership.name}<br />
+          Address: ${nearestDealership.address}<br />
+          Latitude: ${nearestDealership.latitude}<br />
+          Longitude: ${nearestDealership.longitude}
+          `;
+
+        });
+      }
+
+      function calculateDistance(lat1, lng1, lat2, lng2) {
+        // Haversine formula to calculate the distance between two coordinates
+        var radius = 6371; // Earth's radius in kilometers
+        var dLat = (lat2 - lat1) * (Math.PI / 180);
+        var dLng = (lng2 - lng1) * (Math.PI / 180);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+          Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = radius * c;
+        return d;
+      }
+    </script>
+</body>
+
+</html>

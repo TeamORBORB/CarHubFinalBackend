@@ -1,0 +1,716 @@
+*{
+    margin: 0;
+    padding: 0;
+    /*can be applied to all of the html elements*/
+    font-family: 'Poppins', sans-serif;
+    /*the second part of the font from google!!*/
+ }
+ /*background colors and images*/
+ .header{
+    min-height: 100vh;
+    width: 100%;
+    /*the gif adds to the moving banner on the website*/
+    background-image: linear-gradient(rgba(147, 149, 158, 0.7),rgba(147, 149, 158, 0.7)),url(images/banner.gif);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+ }
+ 
+ 
+ .headerinv{
+    min-height: 100vh;
+    width: 100%;
+    /*the gif adds to the moving banner on the website*/
+    background-image: linear-gradient(rgba(147, 149, 158, 0.7),rgba(147, 149, 158, 0.7)),url(images/banner.gif);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+ } 
+
+ .header2022BMWM4{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2016BuickEnclave{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+
+ .header2019ChevroletCorvette{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2020ChevroletSuburban{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2018LincolnContinentalX{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2018Chrysler300{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2020HondaCivicTypeR{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2022FordBronco{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2017FordMustang{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2019DodgeChallenger{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2016Nissan370Z{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216716068-ae382ad2-a6f3-4b93-b62f-25056dcad225.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2016InfinitiQq50{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216715510-13b0907a-bc66-439d-941e-e203e6e65ab3.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2019HondaCivicTypeR{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216715061-3ee670cb-7714-4cc9-a773-4809778d4a0f.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2020AudiQ5{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216714460-3b5b5a79-53ea-4357-8a59-44a93a8185ea.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2017DodgeCharger{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216713644-313a92cf-e829-4e59-9e16-77cb4b4fe0a5.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2017HondaOddyssey{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216713140-bbe9923f-c014-4a58-9e97-b8d150864e77.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2016ToyotaSienna{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216712060-3f00f29e-3a1e-40b4-8395-43a8b8c28e37.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2022SubaruWRXSTI{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216457973-61ed77b4-7304-4dc1-a095-9463dc85bb58.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2019SubaruOutlander{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216457687-8d29f77d-7143-430d-9579-22868f2c18d5.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2022GenesisG90{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216456807-a9e57a43-ae56-4c52-b5da-7b76e8beadf6.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .header2019ToyotaHighlander{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216453384-e8763a12-3e59-43cb-a90b-213b0e5a0de8.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+.header2017AudiS4{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216452528-0a298d1c-ff36-4872-9681-1df232deb47a.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;   
+}
+
+ .headerTeslaS{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216450140-ec3e9f27-c4b7-4b92-9982-3d974e8bff7d.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;    
+ }
+
+.header2020ToyotaCamry{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216449299-a2b5ee22-1ab1-49fa-ab97-4dcffd27ae7f.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;    
+}
+
+.header2019hondacivic{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216135564-865b3c54-d1b6-45be-a506-826b66d488c9.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;    
+}
+
+.headerBMW535i{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/216134760-3e710f61-6aeb-4a40-a05d-7f851a1a490d.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;    
+}
+
+ .headerBMWm340i{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url(https://user-images.githubusercontent.com/111478625/215885926-8e2a326b-ec99-4862-96b5-9162c91b23ea.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;  
+}
+
+
+ .headerVWjetta{
+   min-height: 100vh;
+   width: 100%;
+   /*the gif adds to the moving banner on the website*/
+   background-image: url( https://user-images.githubusercontent.com/111478625/215884488-2cacea34-f75a-45d9-bc7e-4bad4bb3bc71.png);
+   background-position: center;
+   background-size: cover;
+   position: relative;  
+}
+
+ .headertoyotaGr86{
+    min-height: 100vh;
+    width: 100%;
+    /*the gif adds to the moving banner on the website*/
+    background-image: url(https://user-images.githubusercontent.com/111478625/215884213-e05e17af-d275-4ef2-b056-7c343ec4832a.png);
+    background-position: center;
+    background-size: cover;
+    position: relative;  
+ }
+
+ .headerlexusRCF{
+    height: 100vh;
+    width: 100%;
+    /*the gif adds to the moving banner on the website*/
+    background-image: url(https://user-images.githubusercontent.com/111478625/215028710-ca85fe3a-599f-49b1-bc62-f623d2f88c40.png);
+    margin-bottom: 50em;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+ }
+ /*this will align the different cta buttons (home, inventory, ect.)*/
+ nav{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+ }
+ nav img{
+    width: 150px;
+ }
+ /*fixing the size of the logo*/
+ .nav-links{
+    flex: 1;
+    text-align: right;
+ }
+ /*the ul and li are basically the list/cta buttons on the top of the page*/
+ .nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+ }
+ /*color and removing the underlining of cta buttons aka the animation :)*/
+ .nav-links ul li a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 13px;
+ }
+ /*underline for the cta buttons*/
+ .nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: rgb(77, 66, 68);
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+ }
+ /*the cta button underline is only seen with cursor on it*/
+ .nav-links ul li:hover::after{
+    width: 100%;
+ }
+ /*to make the text into the center of the website*/
+ .text-box{
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+ }
+ /*title size*/
+ .text-box h1{
+    font-size:62px;
+ }
+ /*size of the text under the title and the text color*/
+ .text-box p{
+    margin: 10px 0 40px;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+ }
+ 
+ /*the inventory btn aka the 'Find Your Dream Car Today!' btn/box*/
+ .inv-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+ }
+ /*when the inv-btn is hovered by the cursor then there will be a different color, this is similar to the underline of the cta buttons*/
+ .inv-btn:hover{
+    border: 1px solid rgb(77, 66, 68);
+    background: rgb(77, 66, 68);
+    transition: 1s;
+ }
+ /*iphone view*/
+ @media(max-width: 700px){
+    .text-box h1{
+        font-size: 20px;
+    }
+    .nav-links ul li{
+        display: block;
+    }
+ }
+ #preloader{
+   background: rgb(77, 66, 68) url("https://giphy.com/gifs/corgi-lazy-hk-vbeNMLuswd7RR25lah") no-repeat center center;
+   background-size: cover;
+   height: 100vh;
+   width: 100vw;
+   top: 0;
+   left: 0;
+   position: fixed;
+}
+ /*---CARS---*/
+ /*different car brands and descriptions*/
+ .cars{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+ }
+
+ h1{
+    font-size: 36px;
+    font-weight: 600;
+ }
+ p{
+    color: rgb(61, 56, 56);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+ }
+ .row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-evenly;
+ }
+ /*box around descriptions*/
+ .cars-col{
+    flex-basis: 23%;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+ }
+ h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px;
+ }
+ /*hover effect*/
+ .cars-col:hover{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+ }
+ /*iphone view boxes*/
+ @media(max-width: 700px){
+    .row{
+        flex-direction: column;
+    }
+ }
+ /*-------ABOUT-------*/
+ .sub-header{
+    height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(147, 149, 158, 0.7),rgba(147, 149, 158, 0.7)),url(images/banner2.gif);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+ 
+ }
+ .sub-header h1{
+    padding-top: 150px;
+ }
+ /*about padding*/
+ .about-us{
+    width: 80%;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    color: #808896;
+ }
+
+.about-col{
+   flex-basis: 48%;
+   padding: 30px 50px;
+   color: #979797;
+   background-image: linear-gradient(rgba(147, 149, 158, 0.7),rgba(147, 149, 158, 0.7));
+   background-position: center;
+   background-size: cover;
+}
+.about-col img{
+   width: 100%;
+}
+
+ /*------Mailing------*/
+
+
+ .sub-search{
+    height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(147, 149, 158, 0.7),rgba(147, 149, 158, 0.7)),url(images/banner2.gif);
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+ 
+ 
+ }
+ .mailing h3{
+    margin-top: 15%;
+    font-weight: 400;
+    font-size: 30px;
+ }
+ .inv h1{
+    margin-top: 30px;
+    font-size: 30px;
+ }
+ .inv p{
+    margin: 10px 0 50 px;
+ }
+
+ 
+ /*----MAIL BAR---*/
+ 
+
+
+ .form{
+    background: #fff;
+    display: flex;
+    width: fit-content;
+ }
+ .form input{
+    border: 0;
+    outline: none;
+    padding: 10px 20px;
+    height: 60px;
+    width: 400px;
+    font-size: 16px;
+ }
+ .form button{
+    background: #eb7f41;
+    border: none;
+    outline: none;
+    height: 60px;
+    width: 100px;
+    cursor: pointer;
+ }
+ 
+ .span{
+    color:rgb(255, 162, 57);
+    margin-top: 10px;
+    display: block;
+    font-size: 20px;
+ }
+ 
+ 
+ .lb{
+    padding-top: 25px; 
+    padding-left: 38.5%; 
+ }
+ 
+ 
+ 
+ 
+ .title{
+    text-align:center;
+ }
+ 
+ 
+ .About-us-title{
+    position:absolute;
+    top: 200x;
+    left: 50%;
+    transform:translate(-60%,0)
+ }
+ 
+ 
+ .description{
+    position:absolute;
+    top:180px;
+    right: 92px;
+    text-align:center;
+    width:90%
+ }
+ 
+ 
+ 
+ 
+ .bottom{
+    width: 35px;
+    height: 35px;
+    transition: .5s;
+    float: left;
+    box-shadow: -2px 2px 0 darkgrey;
+    position:absolute;
+    right:50%;
+    bottom:30px;
+ }
+ 
+ 
+  .bottom {
+    transform: rotate(315deg);
+ }
+ 
+ *{
+    margin:0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+ }
+ 
+ 
+ .background12{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.7), #3551b5 ),url('https://user-images.githubusercontent.com/111464993/213894564-bf775918-af50-4ea4-8364-4953e4cb24e8.jpg');
+    background-position:center;
+    background-size:cover;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+ }
+ 
+ 
+ form{
+    width: 90%;
+    max-width:600px;
+ }
+ 
+ 
+ .input-group{
+    margin-bottom: 30px;
+    position:relative;
+ }
+ 
+ 
+ input, textarea{
+    width:100%;
+    padding:10px;
+    outline:0;
+    border: 1px solid #fff;
+    color: #fff;
+    background:transparent;
+    font-size:15px;
+ }
+ 
+ 
+ label{
+    /* height: 100%;
+    position: absolute;
+    left: 0;
+    top:0; */
+    padding: 10px;
+    color: #fff;
+    /* cursor: text; */
+    /* transition: 0.2s; */
+ }
+ 
+ 
+ button{
+    padding: 10px 0;
+    color: #fff;
+    outline: none;
+    background: transparent;
+    border: 1px solif #fff;
+    width:100%;
+    cursor: pointer;
+ }
+ 
+ 
+ input:focus~label,
+ input:valid~label,
+ textarea:focus~label,
+ textarea:valid~label{
+    top: -35px;
+    font-size: 14px;
+ }
+ 
+ 
+ .row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+ }
+ 
+ 
+ .row .input-group{
+    flex-basis: 48%;
+ }
+ 
+
+
+ 
+ 
+ 
+ 
