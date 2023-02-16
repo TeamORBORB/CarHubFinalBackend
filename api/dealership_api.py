@@ -1,19 +1,26 @@
+<<<<<<< HEAD
 
 from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from __init__ import app, db
+=======
+from flask import jsonify
+from __init__ import app
+>>>>>>> bc5a03a254ff0315e95434ba649e7a04b77fcdcc
 from model.dealership_db import Dealership, session
 
 @app.route('/dealerships')
 def get_dealerships():
     dealerships = session.query(Dealership).all()
-    return jsonify([d.__dict__ for d in dealerships])
+    
+    response = []
+    for d in dealerships:
+        # removing some sqlachemy bloat or whatever this is
+        del d.__dict__["_sa_instance_state"]
+        response.append(d.__dict__)
 
-@app.route('/dealerships/<int:dealership_id>')
-def get_dealership(dealership_id):
-    dealership = session.query(Dealership).filter_by(id=dealership_id).one()
-    return jsonify(dealership.__dict__)
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run()

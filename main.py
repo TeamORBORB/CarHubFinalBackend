@@ -14,7 +14,6 @@ from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
 import api.dealership_api
 
-
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(user_api) # register api routes
@@ -46,11 +45,6 @@ def activate_job():
 from flask import Flask, request, jsonify, render_template
 import sqlite3
 
-@app.route('/comments')
-def handle_comments():
-    comments = fetch_comments()
-    return render_template("comments.html", comments=comments)
-
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
     if request.method == 'GET':
@@ -61,6 +55,11 @@ def handle_comments_post_get():
         comment = request.form['comment']
         insert_comment(username, comment)
         return "Comment added successfully", 201
+
+# @app.route('/comments')
+# def handle_comments():
+#     comments = fetch_comments()
+#     return render_template("comments.html", comments=comments)
 
 def init_db():
     conn = sqlite3.connect('comments.db')
