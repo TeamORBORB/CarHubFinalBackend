@@ -132,18 +132,18 @@ class User(db.Model):
         db.session.commit()
         return None
 
-        
+
 """Database Creation and Testing """
 # Builds working data for testing
 def initUsers():
     """Create database and tables"""
     db.create_all()
     """Tester data for table"""
-    u1 = User(name='Thomas Edison', uid='toby', password='123toby', dob=date(1847, 2, 11))
-    u2 = User(name='Nicholas Tesla', uid='niko', password='123niko')
-    u3 = User(name='Alexander Graham Bell', uid='lex', password='123lex')
-    u4 = User(name='Eli Whitney', uid='whit', password='123whit')
-    u5 = User(name='John Mortensen', uid='jm1021', dob=date(1959, 10, 21))
+    u1 = User(uid='A.B')
+    u2 = User(uid='C.D')
+    u3 = User(uid='E.F')
+    u4 = User(uid='G.H')
+    u5 = User(uid='I.J')
 
     users = [u1, u2, u3, u4, u5]
 

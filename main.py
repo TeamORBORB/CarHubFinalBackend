@@ -48,6 +48,7 @@ def ds():
 @app.before_first_request
 def activate_job():
     initCars()
+    initUsers()
 
 from flask import Flask, request, jsonify, render_template
 import sqlite3
