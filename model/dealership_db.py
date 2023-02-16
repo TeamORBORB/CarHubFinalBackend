@@ -2,24 +2,23 @@ from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+from __init__ import db
 
-class Dealership(Base):
+class Dealership(db.Model):
     __tablename__ = 'dealership'
-    name = Column(String)
-    address = Column(String, primary_key=True)
-    latitude = Column(Float)
-    longitude = Column(Float)
+    #id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    address = db.Column(db.String, primary_key=True)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
 
 
     def __repr__(self):
         return f'<name {self.name}>'
 
-engine = create_engine('sqlite:///dealerships.db')
-Base.metadata.create_all(engine)
-
-Session = sessionmaker(bind=engine)
-session = Session()
+db.drop_all()
+db.create_all()
+session = db.session
 
 dealership1 = Dealership(name='RB Carco - Auto Buying', address='11639 Iberia Pl, San Diego, CA 92128', latitude=33.015500, longitude=-117.078660)
 dealership2 = Dealership(name='Interstate Auto Buyers', address='16644 W Bernardo Dr #452, San Diego, CA 92127', latitude=33.015202, longitude=117.083382)
@@ -38,7 +37,4 @@ session.add(dealership5)
 session.add(dealership6)
 session.add(dealership7)
 
-
-
-session.commit()
 session.commit()
