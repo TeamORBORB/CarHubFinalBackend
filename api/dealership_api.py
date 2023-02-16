@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-
-from flask import Flask, jsonify
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from __init__ import app, db
-=======
 from flask import jsonify
 from __init__ import app
->>>>>>> bc5a03a254ff0315e95434ba649e7a04b77fcdcc
 from model.dealership_db import Dealership, session
 
 @app.route('/dealerships')
