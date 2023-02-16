@@ -12,7 +12,6 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
-import api.dealership_api
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
@@ -50,8 +49,6 @@ import sqlite3
 #     comments = fetch_comments()
 #     return render_template("comments.html", comments=comments)
 
-
-#delete comments
 # def delete_all_comments():
 #     conn = sqlite3.connect('comments.db')
 #     c = conn.cursor()
@@ -65,9 +62,8 @@ def handle_comments_post_get():
         comments = fetch_comments()
         return jsonify(comments)
     if request.method == 'POST':
-        data = request.json
-        username = data['username']
-        comment = data['comment']
+        username = request.form['username']
+        comment = request.form['comment']
         insert_comment(username, comment)
         return "Comment added successfully", 201
 
@@ -106,6 +102,6 @@ def insert_comment(username, comment):
 if __name__ == "__main__":
     # change name for testing
     init_db()
-    from flask_cors import CORS
-    cors = CORS(app)
+    # from flask_cors import CORS
+    # cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
