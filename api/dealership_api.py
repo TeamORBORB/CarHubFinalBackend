@@ -1,7 +1,8 @@
+
 from flask import Flask, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from __main__ import app, db
+from __init__ import app, db
 from model.dealership_db import Dealership, session
 
 @app.route('/dealerships')
