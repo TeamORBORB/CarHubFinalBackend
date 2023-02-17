@@ -50,6 +50,7 @@
       </div>
   </div>
   <script>
+     // gets the location of the user
       function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition);
@@ -70,19 +71,19 @@
             location.latitude,
             location.longitude,
           );
-
+        // Determine which dealership is closer
           if(distance < shortestDistance) {
             nearestDealership = location;
             shortestDistance = distance;
           }
         }
-
+        // if there is no dealerships, then the will print out this error message. 
         if(!nearestDealership) {
           alert("couldn't find the shortest distance. Possibly due to empty dealership location list");
         }
 
         return nearestDealership;
-        // Determine which dealership is closer
+       
 
       }
 
@@ -94,6 +95,7 @@
         //let locationsURL = `https://cars.nighthawkcodingsociety.com/dealerships`;
         let locationsURL = `${location.origin}/dealerships`;
         fetch(locationsURL).then(d => d.json()).then(dealershipLocations => {
+          
         // For demo purposes, let's say there are two dealerships
         // located at the following coordinates:
         // var dealership1 = { lat: 33.015200, lng: -117.083380 };
