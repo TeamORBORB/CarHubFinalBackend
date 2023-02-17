@@ -9,11 +9,13 @@ def get_dealerships():
     response = []
     for d in dealerships:
         # removing some sqlachemy bloat or whatever this is
-        del d.__dict__["_sa_instance_state"]
+        try:
+            del d.__dict__["_sa_instance_state"]
+        except:
+            pass
         response.append(d.__dict__)
 
     return jsonify(response)
 
 if __name__ == '__main__':
     app.run()
-
