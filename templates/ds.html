@@ -47,8 +47,23 @@
       </div>
     </div>
         <button class= "button-29" onclick="getLocation()">Find the closest dealership!</button>
+        <form method="POST" action="/dealership_submit">
+        <label>Name of the dealership:</label>
+        <input type="text" name="name"><br>
+        <label>Address of the dealership:</label>
+        <input type="text" name="address"><br>
+        <label>Latitude:</label>
+        <input type="text" name="latitude"><br>
+        <label>Longitude:</label>
+        <input type="text" name="longitude"><br>
+        <input type="submit" value="Submit">
       </div>
+    <div>
+
+      </form>
+    </div>
   </div>
+  
   <script>
      // gets the location of the user
       function getLocation() {
