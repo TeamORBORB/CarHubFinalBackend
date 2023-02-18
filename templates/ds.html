@@ -11,10 +11,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&family=Rubik+Bubbles&display=swap"
     rel="stylesheet">
-</head>
-
-<body>
-  <section class="header">
+ <section class="header">
     <nav>
       <a href="index.html"><img src="/static/assets/logo.png"></a>
       <div class="nav-links">
@@ -30,39 +27,42 @@
       </div>
     </nav>
   </section>
+</head>
+<body>
   <div class="text-box">
-    <h3><u> LOCAL DEALERSHIPS</u></h3>
+    <h2 style="margin-top: 50px;"><u>YOUR LOCAL DEALERSHIPS</u></h2>
    <!--<iframe
       src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d13383.443500762725!2d-117.11470920128966!3d33.0074432278256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sdealerships!5e0!3m2!1sen!2sus!4v1675374477551!5m2!1sen!2sus"
       width="1000" height="650" style="border: 5px solid rgb(255, 255, 255);" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe> --> 
     <div>
       <div id="info-box" class="area">
-        <h2>Your location:</h2>
+        <h3>Your location:</h3>
         <div id="location"></div>
-      </div>
+      </div> 
       <div id="info-box" class="area">
-        <h2>Closest dealership</h2>
+        <h3>Closest dealership</h3>
         <div id="dealership"></div>
       </div>
     </div>
-        <button class= "button-29" onclick="getLocation()">Find the closest dealership!</button>
-        <form method="POST" action="/dealership_submit">
+        <button style="margin-top: 5px;" class= "button-29" onclick="getLocation()">Find the closest dealership!</button>
+        <h2 style="margin-top: 50px;"><u>ADD YOUR LOCAL DEALERSHIP</u></h2>
+        <form method="POST" action="/dealership_submit" style="margin-left: auto; margin-right: auto;">
         <label>Name of the dealership:</label>
-        <input type="text" name="name"><br>
+        <input type="text" name="name" class="area"><br>
         <label>Address of the dealership:</label>
-        <input type="text" name="address"><br>
-        <label>Latitude:</label>
-        <input type="text" name="latitude"><br>
-        <label>Longitude:</label>
-        <input type="text" name="longitude"><br>
-        <input type="submit" value="Submit">
+        <input type="text" name="address" class="area"><br>
+        <label>Latitude of the dealership:</label>
+        <input type="text" name="latitude"class="area"><br>
+        <label>Longitude of the dealership:</label>
+        <input type="text" name="longitude"class="area"><br>
+        <input type="submit" value="Submit" class= "button-29" style="margin-top: 5px;">
       </div>
     <div>
-
       </form>
     </div>
   </div>
+</body>
   
   <script>
      // gets the location of the user
