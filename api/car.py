@@ -42,7 +42,7 @@ class CarsAPI:
             if body_style is None:
                 return {'message': f'Year is missing, or is less than 1 character'}, 210
             # validate engine
-            engine = engine.get('engine')
+            engine = body.get('engine')
             if engine is None:
                 return {'message': f'Year is missing, or is less than 1 character'}, 210
                     
