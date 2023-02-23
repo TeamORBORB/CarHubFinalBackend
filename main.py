@@ -72,40 +72,40 @@ def handle_comments_post_get():
         return "Comment added successfully", 201
 
 
-def init_db():
-    conn = sqlite3.connect('comments.db')
-    c = conn.cursor()
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS comments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
-            comment TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    ''')
-    conn.commit()
-    conn.close()
+# def init_db():
+#     conn = sqlite3.connect('comments.db')
+#     c = conn.cursor()
+#     c.execute('''
+#         CREATE TABLE IF NOT EXISTS comments (
+#             id INTEGER PRIMARY KEY AUTOINCREMENT,
+#             username TEXT NOT NULL,
+#             comment TEXT NOT NULL,
+#             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+#         )
+#     ''')
+#     conn.commit()
+#     conn.close()
 
-def fetch_comments():
-    conn = sqlite3.connect('comments.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM comments')
-    comments = c.fetchall()
-    conn.close()
-    return comments
+# def fetch_comments():
+#     conn = sqlite3.connect('comments.db')
+#     c = conn.cursor()
+#     c.execute('SELECT * FROM comments')
+#     comments = c.fetchall()
+#     conn.close()
+#     return comments
 
-def insert_comment(username, comment):
-    conn = sqlite3.connect('comments.db')
-    c = conn.cursor()
-    c.execute("INSERT INTO comments (username, comment) VALUES (?, ?)", (username, comment))
-    conn.commit()
-    conn.close()
+# def insert_comment(username, comment):
+#     conn = sqlite3.connect('comments.db')
+#     c = conn.cursor()
+#     c.execute("INSERT INTO comments (username, comment) VALUES (?, ?)", (username, comment))
+#     conn.commit()
+#     conn.close()
 
 
 # this runs the application on the development server
 if __name__ == "__main__":
     # change name for testing
-    init_db()
+    # init_db()
     from flask_cors import CORS
     cors = CORS(app)
     app.run(debug=True, host="127.0.0.1", port="8055")
