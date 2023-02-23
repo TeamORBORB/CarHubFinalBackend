@@ -12,10 +12,9 @@ from model.cars import initCars
 # setup APIs
 from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
-import api.dealership_api
 
 from __init__ import app
-from model.dealership_db import Dealership, session
+# from model.dealership_db import Dealership, session
 
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
@@ -40,10 +39,6 @@ def car():
 
     output = response.json()
     return render_template("cars.html", cars=output)
-
-@app.route('/dealership/')  
-def ds():
-    return render_template("ds.html")
 
 @app.before_first_request
 def activate_job():
