@@ -14,6 +14,9 @@ from api.user import user_api # Blueprint import api definition
 from api.car import cars_api
 import api.dealership_api
 
+from __init__ import app
+from model.dealership_db import Dealership, session
+
 # register URIs
 # app.register_blueprint(joke_api) # register api routes
 app.register_blueprint(user_api) # register api routes
@@ -38,12 +41,40 @@ def car():
     output = response.json()
     return render_template("cars.html", cars=output)
 
+
+
 @app.before_first_request
 def activate_job():
     initCars()
 
+
+# dont change or delete this code, contact me if broken or not working    - mati
+
+#frontend
+@app.route('/dealership/')  
+def ds():
+    return render_template("ds.html")
+
+# get all dealerships
+@app.route('/dealerships/')  
+def ds_db():
+    dealerships = session.query(Dealership).all()
+
+    response = []
+    for d in dealerships:
+        try:
+            del d.__dict__["_sa_instance_state"]
+        except:
+            pass
+        response.append(d.__dict__)
+
+    return jsonify(response)
+
+# -----------------------------------------------------
+
+
 from flask import Flask, request, jsonify, render_template
-import sqlite3
+#import sqlite3
 
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
