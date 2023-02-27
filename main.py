@@ -74,7 +74,7 @@ def ds_db():
 
 
 from flask import Flask, request, jsonify, render_template
-#import sqlite3
+import sqlite3
 
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
