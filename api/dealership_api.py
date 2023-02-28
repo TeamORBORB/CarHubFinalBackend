@@ -1,4 +1,5 @@
-# contact me before changing any of this code
+# dont change or delete this code, contact me if broken or not working    - mati
+
 
 from __init__ import app 
 from flask import jsonify, request
@@ -28,13 +29,12 @@ def get_dealerships():
 @app.route('/dealerships', methods=['POST'])
 def submit():
     data = request.json
-    print("i received data lmao")
-    print(data)
+    #print(data)
     name = data.get('name')
     address = data.get('address')
     latitude = data.get('latitude')
     longitude = data.get('longitude')
-
+    
     if not all([name, address, latitude, longitude]):
         return jsonify({'message': 'Missing data', "message_type": "error"})
 
@@ -47,6 +47,20 @@ def submit():
         return jsonify({"message": "Address already exists", "message_type": "error"})
 
     return jsonify({"message": 'Data inserted successfully', "message_type": "success"})
+
+
+@app.route('/dealerships/delete', methods=['POST'])
+def delete_dealership(id):
+    dealership = session.query(Dealership).filter(Dealership.id == id).first()
+    if not dealership:
+        return jsonify({'message': 'Dealership not found', 'message_type': 'error'})
+
+    session.delete(dealership)
+    session.commit()
+
+    return jsonify({'message': 'Dealership deleted successfully', 'message_type': 'success'})
+
+
 
 if __name__ == '__main__':
     app.run()
