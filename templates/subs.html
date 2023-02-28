@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subscribers</title>
+</head>
+<body>
+    <h1>Subscribers</h1>
+    <h2>Liquid-subs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>subs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sub in subs %}
+            <tr>
+                <td>{{ sub.make }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   <h3>Subscribers</h3>
+<!--Button labeled "make"-->
+      <table>
+        <thead>
+        <tr>
+            <th>Make</th>
+        </tr>
+        </thead>
+        <tbody id="result">
+         </tbody>
+      </table>
+       
+       <script>
+        const resultContainer = document.getElementById("result");
+      
+        const url = "https://cars.nighthawkcodingsociety.com/api/subs/";
+        const headers = {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'default',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        };
+     
+        // Fetch data from the database
+        fetch(url, headers)
+          .then(response => {
+            if (response.status != 200) {
+                const errorMsg = 'Database response error: ' + response.status;
+                console.log(errorMsg);
+                const tr = document.createElement("tr");
+                const td = document.createElement("td");
+                td.innerHTML = errorMsg;
+                tr.appendChild(td);
+                resultContainer.appendChild(tr);
+                return;
+            }
+            // Parse the json and add it to the webpage
+            response.json().then(data => {
+                console.log(data);      
+
+                // adding a new row for each car from each json node
+                for (const row of data) {
+                  
+                  const tr = document.createElement("tr");
+                  const make = document.createElement("td");
+
+                  make.innerHTML = row.make;
+                  tr.appendChild(make);
+
+                  // if (likes == 1) {
+                  //   const likes = document.createElement("td");
+                  //   tr.appendChild(likes);
+                  //   return;
+                  // }      
+                  resultContainer.appendChild(tr);
+                }
+            })
+        })
+        .catch(err => {
+          console.error(err);
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.innerHTML = err;
+          tr.appendChild(td);
+          resultContainer.appendChild(tr);
+        }); 
+      </script>
+
+</body>
+</html>
