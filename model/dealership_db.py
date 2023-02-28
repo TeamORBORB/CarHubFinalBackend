@@ -1,8 +1,11 @@
+# contact me before changing any of this code
+
+
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-
 from __init__ import db
+
 
 class Dealership(db.Model):
     __tablename__ = 'dealership'

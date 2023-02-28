@@ -11,20 +11,21 @@ class Car(db.Model):
     _model = db.Column(db.String(255), nullable=False, unique = False)
     _price = db.Column(db.Integer, nullable=False, unique = False)
     _year = db.Column(db.Integer, nullable=False, unique = False)
-    _likes = db.Column(db.Integer, nullable=False, unique = False)
+    _desc = db.Column(db.String(255), nullable=False, unique = True)
     _engine = db.Column(db.String(255), nullable=False, unique = False)
     _body_style = db.Column(db.String(255), nullable=False, unique = False)
+    _owner = db.Column(db.String(255), nullable=False, unique = False)
 
-
-    def __init__(self, make, model, price, year, likes, body_style, engine):
+    def __init__(self, make, model, price, year, desc, body_style, engine, owner):
         # Adding instance attributes
         self._make = make
         self._model = model
         self._price = price
         self._year = year
-        self._likes = likes
+        self._desc = desc
         self._body_style = body_style
         self._engine = engine
+        self._owner = owner
 
     # Add getters and setters for make, model, price, year
     @property
@@ -60,12 +61,12 @@ class Car(db.Model):
         self._year = year
     
     @property
-    def likes(self):
-        return self._likes
+    def desc(self):
+        return self._desc
     
-    @likes.setter
-    def likes(self, likes):
-        self._likes = likes
+    @desc.setter
+    def desc(self, desc):
+        self._desc = desc
 
     @property
     def body_style(self):
@@ -82,16 +83,26 @@ class Car(db.Model):
     @engine.setter
     def engine(self, engine):
         self._engine = engine
-        
+
+    @property
+    def owner(self):
+        return self._owner
+
+    @owner.setter
+    def owner(self, owner):
+        self._owner = owner
+    
+
     def dictionary(self):
         dict = {
             "make" : self.make,
             "model" : self.model,
             "price" : self.price,
             "year" : self.year,
-            "likes" : self.likes,
+            "desc" : self.desc,
             "body_style" : self.body_style,
-            "engine" : self.engine
+            "engine" : self.engine,
+            "owner" : self.owner
         }
         return dict 
 
@@ -117,14 +128,15 @@ class Car(db.Model):
             "model" : self.model,
             "price" : self.price,
             "year" : self.year,
-            "likes" : self.likes,
+            "desc" : self.desc,
             "body_style" : self.body_style,
-            "engine" : self.engine
+            "engine" : self.engine,
+            "owner" : self.owner        
         }
 
     # CRUD update: updates user name, password, phone
     # returns self
-    def update(self, make="", model="", price="", year="", likes="", body_style="", engine=""):
+    def update(self, make="", model="", price="", year="", desc="", body_style="", engine="", owner=""):
         """only updates values with length"""
         if len(make) > 0:
             self.make = make
@@ -134,15 +146,17 @@ class Car(db.Model):
             self.price(price)
         if year > 0:
             self.year(year)
-        if likes >= 0:
-            self.likes(likes)
+        if desc >= 0:
+            self.desc(desc)
         if len(body_style) > 0:
             self.body_style(body_style)
         if len(engine) > 0:
             self.engine(engine)
+        if len(owner) > 0:
+            self.owner(owner)
         db.session.commit()
         return self  
-
+    
     # CRUD delete: remove self
     # None
     def delete(self):
@@ -154,47 +168,13 @@ class Car(db.Model):
 def initCars():
     with app.app_context():
         """Create database and tables"""
-        #db.init_app(app)
-        #db.create_all()
+        # db.init_app(app)
+        db.create_all()
 
         """Data for table"""
-        car1 = Car(make="BMW", model="2 Series", price=34000, year=2021, likes=0, body_style="coupe", engine="2.0L four-cylinder")
-        car2 = Car(make="BMW", model="3 Series", price=41000, year=2021, likes=0, body_style="sedan", engine="2.0L four-cylinder")
-        car3 = Car(make="BMW", model="4 Series", price=51000, year=2021, likes=0, body_style="coupe", engine="2.0L four-cylinder")
-        car3 = Car(make="BMW", model="4 Series", price=51000, year=2021, likes=0, body_style="coupe", engine="2.0L turbo 4-cylinder")
-        car4 = Car(make="BMW", model="5 Series", price=54000, year=2021, likes=0, body_style="sedan", engine="2.0L turbo 4-cylinder")
-        car5 = Car(make="BMW", model="7 Series", price=83000, year=2021, likes=0, body_style="sedan", engine="3.0L turbo inline-6")
-        car6 = Car(make="BMW", model="X1", price=35000, year=2021, likes=0, body_style="SUV", engine="2.0L turbo 4-cylinder")
-        car7 = Car(make="BMW", model="X2", price=40000, year=2021, likes=0, body_style="SUV", engine="2.0L turbo 4-cylinder")
-        car8 = Car(make="BMW", model="X3", price=44000, year=2021, likes=0, body_style="SUV", engine="2.0L turbo 4-cylinder")
-        car9 = Car(make="BMW", model="X4", price=50000, year=2021, likes=0, body_style="SUV", engine="2.0L turbo 4-cylinder")
-        car10 = Car(make="BMW", model="X5", price=56000, year=2021, likes=0, body_style="SUV", engine="3.0L turbo inline-6")
-        car11 = Car(make="BMW", model="X6", price=64000, year=2021, likes=0, body_style="SUV", engine="3.0L turbo inline-6")
-        car12 = Car(make="BMW", model="Z4", price=50000, year=2021, likes=0, body_style="convertible", engine="2.0L turbo 4-cylinder")
-        car20 = Car(make="Mercedes-Benz", model="A-Class", price=34000, year=2021, likes=0, body_style="sedan", engine="2.0L turbo 4-cylinder")
-        car21 = Car(make="Mercedes-Benz", model="C-Class", price=45000, year=2021, likes=0, body_style="sedan", engine="2.0L turbo 4-cylinder")
-        car22 = Car(make="Mercedes-Benz", model="E-Class", price=54000, year=2021, likes=0, body_style="sedan", engine="2.0L turbo 4-cylinder")
-        car23 = Car(make="Mercedes-Benz", model="S-Class", price=90000, year=2021, likes=0, body_style="sedan", engine="3.0L turbo inline-6")
-        car24 = Car(make="Mercedes-Benz", model="GLE-Class", price=54000, year=2021, likes=0, body_style="SUV", engine="3.5L V6")
-        car25 = Car(make="Mercedes-Benz", model="GLC-Class", price=48000, year=2021, likes=0, body_style="SUV", engine="2.0L Inline-4 Turbo")
-        car26 = Car(make="Tesla", model="Model 3", price=38000, year=2021, likes=0, body_style="Sedan", engine="Electric")
-        car27 = Car(make="Tesla", model="Model S", price=79000, year=2021, likes=0, body_style="Sedan", engine="Electric")
-        car28 = Car(make="Tesla", model="Model X", price=88000, year=2021, likes=0, body_style="SUV", engine="Electric")
-        car29 = Car(make="Tesla", model="Model Y", price=41000, year=2021, likes=0, body_style="SUV", engine="Electric")
-        car30 = Car(make="Jaguar", model="F-PACE", price=45000, year=2021, likes=0, body_style="SUV", engine="2.0L Inline-4 Turbo")
-        car31 = Car(make="Jaguar", model="I-PACE", price=70000, year=2021, likes=0, body_style="SUV", engine="Electric")
-        car32 = Car(make="Jaguar", model="E-PACE", price=40000, year=2021, likes=0, body_style="SUV", engine="2.0L Inline-4 Turbo")
-        car33 = Car(make="Jaguar", model="XE", price=45000, year=2021, likes=0, body_style="Sedan", engine="2.0L Inline-4 Turbo")
-        car34 = Car(make="Jaguar", model="XF", price=52000, year=2021, likes=0, body_style="Sedan", engine="2.0L Inline-4 Turbo")
-        car35 = Car(make="Land Rover", model="Range Rover Evoque", price=45000, year=2021, likes=0, body_style="SUV", engine="2.0L Inline-4 Turbo")
-        car36 = Car(make="Land Rover", model="Range Rover Sport", price=65000, year=2021, likes=0, body_style="SUV", engine="3.0L V6 Supercharged")
-        car37 = Car(make="Land Rover", model="Range Rover", price=85000, year=2021, likes=0, body_style="SUV", engine="3.0L V6 Supercharged")
+        car1 = Car(make="BMW", model="2 Series", price=34000, year=2021, desc="The BMW 2 series is a stylish sports coupe that drives just as well as it looks.", body_style="coupe", engine="2.0L four-cylinder", owner="John Doe")
 
-
-        cars = [car1, car2, car3, car4, car5, car6, car7, car8, car9, car10,
-        car11, car12, car20,
-        car21, car22, car23, car24, car25, car26, car27, car28, car29, car30,
-        car31, car32, car33, car34, car35, car36, car37]
+        cars = [car1]
 
         """Builds sample user/note(s) data"""
         for car in cars:
@@ -204,4 +184,4 @@ def initCars():
                 '''fails with bad or duplicate data'''
                 db.session.remove()
                 print(f"Records exist, duplicate car, or error: {car.id}")
-                
+

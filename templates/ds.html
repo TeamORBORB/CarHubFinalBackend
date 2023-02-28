@@ -11,9 +11,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&family=Rubik+Bubbles&display=swap"
     rel="stylesheet">
-</head>
-
-<body>
   <section class="header">
     <nav>
       <a href="index.html"><img src="/static/assets/logo.png"></a>
@@ -30,84 +27,301 @@
       </div>
     </nav>
   </section>
+  <style>
+    .error {
+      color: red;
+    }
+
+    .success {
+      color: lime;
+    }
+  </style>
+</head>
+
+<body>
   <div class="text-box">
-    <h3><u> LOCAL DEALERSHIPS</u></h3>
-   <!--<iframe
-      src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d13383.443500762725!2d-117.11470920128966!3d33.0074432278256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sdealerships!5e0!3m2!1sen!2sus!4v1675374477551!5m2!1sen!2sus"
-      width="1000" height="650" style="border: 5px solid rgb(255, 255, 255);" allowfullscreen="" loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"></iframe> --> 
+    <h2 style="margin-top: 50px;"><u>YOUR LOCAL DEALERSHIPS</u></h2>
     <div>
       <div id="info-box" class="area">
-        <h2>Your location:</h2>
+        <h3>Your location:</h3>
         <div id="location"></div>
       </div>
       <div id="info-box" class="area">
-        <h2>Closest dealership</h2>
+        <h3>Closest dealership</h3>
         <div id="dealership"></div>
       </div>
     </div>
-        <button class= "button-29" onclick="getLocation()">Find the closest dealership!</button>
-      </div>
-  </div>
-  <script>
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
+    <button style="margin-top: 5px;" class="button-29" onclick="getLocation()">Find the closest dealership!</button>
+
+    <!--ADD DEALER-->
+    <h2 style="margin-top: 50px;"><u>ADD YOUR LOCAL DEALERSHIP</u></h2>
+    <form method="POST" action="/dealerships" style="margin-left: auto; margin-right: auto;">
+      <h3 id="response-message"></h3>
+      <label>Name of the dealership:</label>
+      <input type="text" name="name" class="area"><br>
+    
+      <label>Address of the dealership:</label>
+      <input type="text" name="address" class="area"><br>
+    
+      <label>Latitude of the dealership:</label>
+      <input type="text" name="latitude" class="area"><br>
+    
+      <label>Longitude of the dealership:</label>
+      <input type="text" name="longitude" class="area"><br>
+    
+      <input type="submit" value="Submit" class="button-29" style="margin-top: 5px;">
+      <button type="button" onclick="deleteDealership()" class="button-29" style="margin-top: 5px;">Delete Dealership</button>
+    </form>
+    
+    <script>
+    function deleteDealership() {
+      const dealershipId = // get the dealership ID from somewhere, e.g. a hidden input field in the form
+      fetch('/dealerships/' + dealershipId, {
+        method: 'DELETE',
+      })
+      .then(response => {
+        if (response.ok) {
+          // show success message and/or update UI
         } else {
-          document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+          // show error message and/or update UI
         }
-      }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // show error message and/or update UI
+      });
+    }
+    </script>
+      <script>
+            function fetchDealerships() {
+              // make a GET request to fetch dealership data
+              fetch('/dealerships')
+                .then(response => response.json())
+                .then(data => {
+                  // get the table element
+                  const table = document.getElementById('dealerships-table');
 
-      function findShortestLocation(userLocation, dealershipLocations) {
-        // Calculate the distance between the user's location and each dealership
-        let shortestDistance = Infinity
-        let nearestDealership = dealershipLocations.pop();
+                  // add headers to the table
+                  const headers = ['Dealership Name', 'Address', 'Longitude', 'Latitude', ''];
+                  const headerRow = table.insertRow();
+                  for (let i = 0; i < headers.length; i++) {
+                    const headerCell = headerRow.insertCell();
+                    headerCell.textContent = headers[i];
+                  }
 
-        for(let location of dealershipLocations) {
-          let distance = calculateDistance(
-            userLocation.latitude, 
-            userLocation.longitude, 
-            location.latitude,
-            location.longitude,
-          );
+                  // add data rows to the table
+                  for (let i = 0; i < data.length; i++) {
+                    const dealership = data[i];
+                    const row = table.insertRow();
+                    row.insertCell().textContent = dealership.name;
+                    row.insertCell().textContent = dealership.address;
+                    row.insertCell().textContent = dealership.longitude;
+                    row.insertCell().textContent = dealership.latitude;
+                    const editCell = row.insertCell();
+                    const editButton = document.createElement('button');
+                    editButton.textContent = 'Edit';
+                    editButton.addEventListener('click', () => editRow(row));
+                    editCell.appendChild(editButton);
+                    const deleteCell = row.insertCell();
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', () => deleteRow(row));
+                    deleteCell.appendChild(deleteButton);
+                  }
+                })
+                .catch(error => console.error(error));
+            }
 
-          if(distance < shortestDistance) {
-            nearestDealership = location;
-            shortestDistance = distance;
+            function editRow(row) {
+              // get the input values from the row
+              const name = row.cells[0].textContent;
+              const address = row.cells[1].textContent;
+              const longitude = row.cells[2].textContent;
+              const latitude = row.cells[3].textContent;
+
+              // replace the row with input fields
+              row.innerHTML = `
+                <td><input type="text" value="${name}"></td>
+                <td><input type="text" value="${address}"></td>
+                <td><input type="text" value="${longitude}"></td>
+                <td><input type="text" value="${latitude}"></td>
+                <td>
+                  <button onclick="saveRow(this.parentNode.parentNode)">Save</button>
+                  <button onclick="cancelEdit(this.parentNode.parentNode)">Cancel</button>
+                </td>
+              `;
+            }
+
+            function saveRow(row) {
+              // get the input values from the row
+              const name = row.cells[0].querySelector('input').value;
+              const address = row.cells[1].querySelector('input').value;
+              const longitude = row.cells[2].querySelector('input').value;
+              const latitude = row.cells[3].querySelector('input').value;
+
+              // make a PUT request to update the dealership
+              fetch('/dealerships/' + row.rowIndex, {
+                method: 'PUT',
+                body: JSON.stringify({ name, address, longitude, latitude }),
+                headers: { 'Content-Type': 'application/json' }
+              })
+                .then(response => response.json())
+                .then(data => {
+                  // replace the input fields with the updated row data
+                  row.innerHTML = `
+                    <td>${data.name}</td>
+                    <td>${data.address}</td>
+                  <td>${data.longitude}</td>
+                  <td>${data.latitude}</td>
+                  <td>
+                    <button onclick="editRow(this.parentNode.parentNode)">Edit</button>
+                    <button onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
+                  </td>
+                `;
+              })
+              .catch(error => console.error(error));
           }
-        }
 
-        if(!nearestDealership) {
-          alert("couldn't find the shortest distance. Possibly due to empty dealership location list");
-        }
+          function cancelEdit(row) {
+            // get the dealership data from the row
+            const dealership = {
+              name: row.cells[0].querySelector('input').value,
+              address: row.cells[1].querySelector('input').value,
+              longitude: row.cells[2].querySelector('input').value,
+              latitude: row.cells[3].querySelector('input').value,
+            };
 
-        return nearestDealership;
-        // Determine which dealership is closer
+            // replace the input fields with the original data
+            row.innerHTML = `
+              <td>${dealership.name}</td>
+              <td>${dealership.address}</td>
+              <td>${dealership.longitude}</td>
+              <td>${dealership.latitude}</td>
+              <td>
+                <button onclick="editRow(this.parentNode.parentNode)">Edit</button>
+                <button onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
+              </td>
+            `;
+          }
 
+          function deleteRow(row) {
+            // make a DELETE request to delete the dealership
+            fetch('https://example.com/api/dealerships/' + row.rowIndex, {
+              method: 'DELETE',
+            })
+              .then(() => {
+                // remove the row from the table
+                row.parentNode.removeChild(row);
+              })
+              .catch(error => console.error(error));
+          }
+
+      </script>
+    </form>
+  </div>
+</body>
+
+<script>
+  const messageBox = document.getElementById("response-message");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    let userInput = {
+      "name": formData.get("name"),
+      "address": formData.get("address"),
+      "latitude": formData.get("latitude"),
+      "longitude": formData.get("longitude"),
+    };
+
+    console.table(userInput);
+
+    let URL = event.target.getAttribute("action");
+    let response = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInput),
+    });
+
+    let {message, message_type: messageType} = await response.json();
+
+    console.log(message, messageType);
+
+    messageBox.innerText = message;
+    messageBox.className = messageType;
+  }
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit', handleSubmit);
+
+  // gets the location of the user
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function findShortestLocation(userLocation, dealershipLocations) {
+    // Calculate the distance between the user's location and each dealership
+    let shortestDistance = Infinity
+    let nearestDealership = dealershipLocations.pop();
+
+    for (let location of dealershipLocations) {
+      let distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        location.latitude,
+        location.longitude,
+      );
+      // Determine which dealership is closer
+      if (distance < shortestDistance) {
+        nearestDealership = location;
+        shortestDistance = distance;
       }
+    }
+    // if there is no dealerships, then the will print out this error message. 
+    if (!nearestDealership) {
+      alert("couldn't find the shortest distance. Possibly due to empty dealership location list");
+    }
 
-      function showPosition(position) {
-        document.getElementById("location").innerHTML = "Latitude: " + position.coords.latitude +
-          "<br>Longitude: " + position.coords.longitude;
+    return nearestDealership;
 
 
-        //let locationsURL = `https://cars.nighthawkcodingsociety.com/dealerships`;
-        let locationsURL = `${location.origin}/dealerships`;
-        fetch(locationsURL).then(d => d.json()).then(dealershipLocations => {
-        // For demo purposes, let's say there are two dealerships
-        // located at the following coordinates:
-        // var dealership1 = { lat: 33.015200, lng: -117.083380 };
-        // var dealership2 = { lat: 34.0522, lng: -118.2437 };
+  }
 
-        let nearestDealership = findShortestLocation(
-          {
-            latitude: position.coords.latitude, 
-            longitude: position.coords.longitude
-          },
-          dealershipLocations
-        );
+  function showPosition(position) {
+    document.getElementById("location").innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;
 
-        document.getElementById("dealership").innerHTML = `
+
+    //let locationsURL = `https://cars.nighthawkcodingsociety.com/dealerships`;
+    let locationsURL = `${location.origin}/dealerships`;
+    fetch(locationsURL).then(d => d.json()).then(dealershipLocations => {
+
+      // For demo purposes, let's say there are two dealerships
+      // located at the following coordinates:
+      // var dealership1 = { lat: 33.015200, lng: -117.083380 };
+      // var dealership2 = { lat: 34.0522, lng: -118.2437 };
+      // if ur close to dealership1, then it will output dealership 1
+      // if ur close to dealership2, then it will output dealership 2
+
+
+
+      let nearestDealership = findShortestLocation(
+        {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        },
+        dealershipLocations
+      );
+
+      document.getElementById("dealership").innerHTML = `
           The nearest dealership is located at:<br />
           Name: ${nearestDealership.name}<br />
           Address: ${nearestDealership.address}<br />
@@ -115,22 +329,22 @@
           Longitude: ${nearestDealership.longitude}
           `;
 
-        });
-      }
+    });
+  }
 
-      function calculateDistance(lat1, lng1, lat2, lng2) {
-        // Haversine formula to calculate the distance between two coordinates
-        var radius = 6371; // Earth's radius in kilometers
-        var dLat = (lat2 - lat1) * (Math.PI / 180);
-        var dLng = (lng2 - lng1) * (Math.PI / 180);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-          Math.sin(dLng / 2) * Math.sin(dLng / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        var d = radius * c;
-        return d;
-      }
-    </script>
+  function calculateDistance(lat1, lng1, lat2, lng2) {
+    // Haversine formula to calculate the distance between two coordinates
+    var radius = 6371; // Earth's radius in kilometers
+    var dLat = (lat2 - lat1) * (Math.PI / 180);
+    var dLng = (lng2 - lng1) * (Math.PI / 180);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = radius * c;
+    return d;
+  }
+</script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template
 import requests
 from flask_restful import Api, Resource
-from __init__ import app
+from __init__ import app, db
 from model.cars import Car
 
 # Creating a Flask blueprint and API routing
@@ -16,7 +16,7 @@ class CarsAPI:
     class _Create(Resource):
         def post(self):
             body = request.get_json()
-            
+
             # validate make
             make = body.get('make')
             if make is None or len(make) < 1:
@@ -33,21 +33,31 @@ class CarsAPI:
             year = body.get('year')
             if year is None:
                 return {'message': f'Year is missing, or is less than 1 character'}, 210
-            # validate likes
-            likes = body.get('likes')
-            if likes is None:
-                return {'message': f'Year is missing, or is less than 1 character'}, 210
+            # validate description
+            desc = body.get('desc')
+            if desc is None or len(desc) < 1:
+                return {'message': f'Description is missing, or is less than 1 character'}, 210
             # validate body style
             body_style = body.get('body_style')
-            if body_style is None:
-                return {'message': f'Year is missing, or is less than 1 character'}, 210
+            if body_style is None or len(body_style) < 1:
+                return {'message': f'Body style is missing, or is less than 1 character'}, 210
             # validate engine
-            engine = engine.get('engine')
-            if engine is None:
-                return {'message': f'Year is missing, or is less than 1 character'}, 210
-                    
-            car = Car(make=make, model=model, price=price, year=year, likes=likes, body_style=body_style, engine=engine)
-            
+            engine = body.get('engine')
+            if engine is None or len(engine) < 1:
+                return {'message': f'Engine is missing, or is less than 1 character'}, 210
+            # validate engine
+            owner = body.get('owner')
+            if owner is None or len(owner) < 1:
+                return {'message': f'Owner is missing, or is less than 1 character'}, 210
+
+            desc = body.get('desc')
+            if desc is not None and len(desc) > 0:
+                existing_desc = Car.query.filter_by(desc=desc).first()
+                if existing_desc is not None:
+                    return {'message': f'A car with the same description already exists'}, 400
+
+            car = Car(make=make, model=model, price=price, year=year, desc=desc, body_style=body_style, engine=engine, owner=owner)
+
             # creates the info in the database
             info = car.create()
             # success returns json of user
@@ -63,8 +73,50 @@ class CarsAPI:
         
             return jsonify(json_ready)  # jsonify creates Flask response object, more specific to APIs than json.dumps
 
+    class _Update(Resource):
+        def put(self, id):
+            car = Car.query.get(id)
+            if car is None:
+                return {'message': f'Car with ID {id} not found'}, 404
+            
+            body = request.get_json()
+            
+            # update the car object with new values
+            car.make = body.get('make', car.make)
+            car.model = body.get('model', car.model)
+            car.price = body.get('price', car.price)
+            car.year = body.get('year', car.year)
+            car.body_style = body.get('body_style', car.body_style)
+            car.engine = body.get('engine', car.engine)
+            car.owner = body.get('owner', car.owner)
+            
+            # save the updated car object
+            car.update()
+            
+            # return the updated car object as JSON
+            return jsonify(car.read())
+            
+
+    class _Delete(Resource):
+        def delete(self, id):
+            # Retrieve the Car object with the given ID from the database
+            car = Car.query.get(id)
+            
+            # Check if the Car object exists
+            if car:
+                # If it exists, delete it from the database
+                car.delete()
+                # Return a success message along with a 200 status code
+                return {'message': f'Car with the ID {id} has been removed'}, 200
+            else:
+                # If the Car object doesn't exist, return a 404 status code along with an error message
+                return {'message': f'Car with the ID {id} not found'}, 404
+
+
     # building RESTapi endpoint
     api.add_resource(_Create, '/create')
     api.add_resource(_Read, '/')
+    #api.add_resource(_Update, '/update/<int:id>')
+    api.add_resource(_Delete, '/delete/<int:id>')
 
 

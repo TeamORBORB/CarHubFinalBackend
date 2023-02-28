@@ -4,7 +4,7 @@ import requests
 from flask import render_template  # import render_template from "public" flask libraries
 
 # import "packages" from "this" project
-from __init__ import app # Definitions initialization
+from __init__ import app, db   # Definitions initialization
 from model.jokes import initJokes
 from model.users import initUsers
 from model.cars import initCars
@@ -41,29 +41,40 @@ def car():
     output = response.json()
     return render_template("cars.html", cars=output)
 
-@app.route('/dealership/')  
-def ds():
-    return render_template("ds.html")
+
 
 @app.before_first_request
 def activate_job():
     initCars()
-    initUsers()
+
+
+# dont change or delete this code, contact me if broken or not working    - mati
+
+#frontend
+@app.route('/dealership/')  
+def ds():
+    return render_template("ds.html")
+
+# get all dealerships
+@app.route('/dealerships/')  
+def ds_db():
+    dealerships = session.query(Dealership).all()
+
+    response = []
+    for d in dealerships:
+        try:
+            del d.__dict__["_sa_instance_state"]
+        except:
+            pass
+        response.append(d.__dict__)
+
+    return jsonify(response)
+
+# -----------------------------------------------------
+
 
 from flask import Flask, request, jsonify, render_template
 import sqlite3
-
-# @app.route('/comments')
-# def handle_comments():
-#     comments = fetch_comments()
-#     return render_template("comments.html", comments=comments)
-
-# def delete_all_comments():
-#     conn = sqlite3.connect('comments.db')
-#     c = conn.cursor()
-#     c.execute('DELETE FROM comments')
-#     conn.commit()
-#     conn.close()
 
 @app.route('/comments', methods=['GET', 'POST'])
 def handle_comments_post_get():
@@ -71,8 +82,9 @@ def handle_comments_post_get():
         comments = fetch_comments()
         return jsonify(comments)
     if request.method == 'POST':
-        username = request.form['username']
-        comment = request.form['comment']
+        data = request.json
+        username = data['username']
+        comment = data['comment']
         insert_comment(username, comment)
         return "Comment added successfully", 201
 
