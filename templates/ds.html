@@ -50,9 +50,11 @@
         <h3>Closest dealership</h3>
         <div id="dealership"></div>
       </div>
-    </div>
-    <button style="margin-top: 5px;" class="button-29" onclick="getLocation()">Find the closest dealership!</button>
 
+    </div>
+    <div>
+    <button style="margin-top: 5px;" class="button-29" onclick="getLocation()">Find the closest dealership!</button>
+    <button class="button-29" onclick="window.location.href='/dealership_delete';">Link to all of the dealerships</button>
     <!--ADD DEALER-->
     <h2 style="margin-top: 50px;"><u>ADD YOUR LOCAL DEALERSHIP</u></h2>
     <form method="POST" action="/dealerships" style="margin-left: auto; margin-right: auto;">
@@ -68,155 +70,25 @@
     
       <label>Longitude of the dealership:</label>
       <input type="text" name="longitude" class="area"><br>
-    
       <input type="submit" value="Submit" class="button-29" style="margin-top: 5px;">
-      <button type="button" onclick="deleteDealership()" class="button-29" style="margin-top: 5px;">Delete Dealership</button>
-    </form>
+    </div>
     
-    <script>
-    function deleteDealership() {
-      const dealershipId = // get the dealership ID from somewhere, e.g. a hidden input field in the form
-      fetch('/dealerships/' + dealershipId, {
-        method: 'DELETE',
-      })
-      .then(response => {
-        if (response.ok) {
-          // show success message and/or update UI
-        } else {
-          // show error message and/or update UI
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // show error message and/or update UI
-      });
-    }
-    </script>
-      <script>
-            function fetchDealerships() {
-              // make a GET request to fetch dealership data
-              fetch('/dealerships')
-                .then(response => response.json())
-                .then(data => {
-                  // get the table element
-                  const table = document.getElementById('dealerships-table');
+    <div>
+      <h2 style="margin-top: 50px;"><u>DELETE DEALERSHIP</u></h2>
+      <br/>
+      <label>Latitude of the dealership:</label>
+      <br/>
+      <input type="text" id="longitude-input" class="area">
+      <br/>
+      <label>Longitude of the dealership:</label>
+      <br/>
+      <input type="text" id="latitude-input" class="area">
+      <br/>
+      <button class="button-29" onclick="deleteDealership()" style="margin-top: 5px;">Delete</button>
+      <br/>
+    </div>
 
-                  // add headers to the table
-                  const headers = ['Dealership Name', 'Address', 'Longitude', 'Latitude', ''];
-                  const headerRow = table.insertRow();
-                  for (let i = 0; i < headers.length; i++) {
-                    const headerCell = headerRow.insertCell();
-                    headerCell.textContent = headers[i];
-                  }
 
-                  // add data rows to the table
-                  for (let i = 0; i < data.length; i++) {
-                    const dealership = data[i];
-                    const row = table.insertRow();
-                    row.insertCell().textContent = dealership.name;
-                    row.insertCell().textContent = dealership.address;
-                    row.insertCell().textContent = dealership.longitude;
-                    row.insertCell().textContent = dealership.latitude;
-                    const editCell = row.insertCell();
-                    const editButton = document.createElement('button');
-                    editButton.textContent = 'Edit';
-                    editButton.addEventListener('click', () => editRow(row));
-                    editCell.appendChild(editButton);
-                    const deleteCell = row.insertCell();
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.addEventListener('click', () => deleteRow(row));
-                    deleteCell.appendChild(deleteButton);
-                  }
-                })
-                .catch(error => console.error(error));
-            }
-
-            function editRow(row) {
-              // get the input values from the row
-              const name = row.cells[0].textContent;
-              const address = row.cells[1].textContent;
-              const longitude = row.cells[2].textContent;
-              const latitude = row.cells[3].textContent;
-
-              // replace the row with input fields
-              row.innerHTML = `
-                <td><input type="text" value="${name}"></td>
-                <td><input type="text" value="${address}"></td>
-                <td><input type="text" value="${longitude}"></td>
-                <td><input type="text" value="${latitude}"></td>
-                <td>
-                  <button onclick="saveRow(this.parentNode.parentNode)">Save</button>
-                  <button onclick="cancelEdit(this.parentNode.parentNode)">Cancel</button>
-                </td>
-              `;
-            }
-
-            function saveRow(row) {
-              // get the input values from the row
-              const name = row.cells[0].querySelector('input').value;
-              const address = row.cells[1].querySelector('input').value;
-              const longitude = row.cells[2].querySelector('input').value;
-              const latitude = row.cells[3].querySelector('input').value;
-
-              // make a PUT request to update the dealership
-              fetch('/dealerships/' + row.rowIndex, {
-                method: 'PUT',
-                body: JSON.stringify({ name, address, longitude, latitude }),
-                headers: { 'Content-Type': 'application/json' }
-              })
-                .then(response => response.json())
-                .then(data => {
-                  // replace the input fields with the updated row data
-                  row.innerHTML = `
-                    <td>${data.name}</td>
-                    <td>${data.address}</td>
-                  <td>${data.longitude}</td>
-                  <td>${data.latitude}</td>
-                  <td>
-                    <button onclick="editRow(this.parentNode.parentNode)">Edit</button>
-                    <button onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
-                  </td>
-                `;
-              })
-              .catch(error => console.error(error));
-          }
-
-          function cancelEdit(row) {
-            // get the dealership data from the row
-            const dealership = {
-              name: row.cells[0].querySelector('input').value,
-              address: row.cells[1].querySelector('input').value,
-              longitude: row.cells[2].querySelector('input').value,
-              latitude: row.cells[3].querySelector('input').value,
-            };
-
-            // replace the input fields with the original data
-            row.innerHTML = `
-              <td>${dealership.name}</td>
-              <td>${dealership.address}</td>
-              <td>${dealership.longitude}</td>
-              <td>${dealership.latitude}</td>
-              <td>
-                <button onclick="editRow(this.parentNode.parentNode)">Edit</button>
-                <button onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
-              </td>
-            `;
-          }
-
-          function deleteRow(row) {
-            // make a DELETE request to delete the dealership
-            fetch('https://example.com/api/dealerships/' + row.rowIndex, {
-              method: 'DELETE',
-            })
-              .then(() => {
-                // remove the row from the table
-                row.parentNode.removeChild(row);
-              })
-              .catch(error => console.error(error));
-          }
-
-      </script>
     </form>
   </div>
 </body>
@@ -291,8 +163,6 @@
     }
 
     return nearestDealership;
-
-
   }
 
   function showPosition(position) {
@@ -344,6 +214,31 @@
     var d = radius * c;
     return d;
   }
+
+  // delete  function
+  function deleteDealership() {
+  var longitude = document.getElementById('longitude-input').value;
+  var latitude = document.getElementById('latitude-input').value;
+
+  fetch(`/dealerships?longitude=${longitude}&latitude=${latitude}`, {
+    method: 'DELETE'
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.message_type === 'success') {
+      document.getElementById('response-message').innerText = data.message;
+    } else {
+      document.getElementById('response-message').innerText = data.message;
+    }
+  })
+  .catch(error => {
+    console.error('Error deleting dealership:', error);
+  });
+}
+
+
+
+
 </script>
 </body>
 

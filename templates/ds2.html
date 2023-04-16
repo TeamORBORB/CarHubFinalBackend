@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dealership List</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <!-- Dealership list container -->
+  <center><strong><h1 style="margin-top: 50px;">List to all of the dealerships: </h1></strong></center>
+  <center><div id="dealership-list"></div></center>
+
+  <!-- JavaScript code to fetch and display dealership data -->
+  <script>
+    // Fetch dealership data from Flask API
+    fetch('/dealerships')
+      .then(response => response.json())
+      .then(data => {
+        // Loop through each dealership object in the response data
+        for (const dealership of data) {
+          // Extract the desired values (name, address, latitude, longitude) from the dealership object
+          const name = dealership.name;
+          const address = dealership.address;
+          const latitude = dealership.latitude;
+          const longitude = dealership.longitude;
+
+          // Create a new DOM element to display the dealership data
+          const dealershipElement = document.createElement('div');
+          dealershipElement.innerHTML = `
+            <div class="area" style="margin-top: 20px;">
+            <strong">Name:</strong> ${name}<br>
+            <strong>Address:</strong> ${address}<br>
+            <strong>Latitude:</strong> ${latitude}<br>
+            <strong>Longitude:</strong> ${longitude}<br>
+            </div>
+          `;
+
+          // Append the dealership element to the "dealership-list" div
+          document.getElementById('dealership-list').appendChild(dealershipElement);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching dealership data:', error);
+      });
+  </script>
+  <style>
+    strong, center{
+        font-family: 'poppins', sans-serif;
+        color: rgb(255, 255, 255);
+    }
+    html {
+    background-color: rgb(180, 181, 187);
+  }
+  </style>
+</body>
+</html>

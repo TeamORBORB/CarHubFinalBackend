@@ -1,6 +1,5 @@
 # dont change or delete this code, contact me if broken or not working    - mati
 
-
 from __init__ import app 
 from flask import jsonify, request
 from flask import Flask
@@ -49,18 +48,20 @@ def submit():
     return jsonify({"message": 'Data inserted successfully', "message_type": "success"})
 
 
-@app.route('/dealerships/delete', methods=['POST'])
-def delete_dealership(id):
-    dealership = session.query(Dealership).filter(Dealership.id == id).first()
-    if not dealership:
-        return jsonify({'message': 'Dealership not found', 'message_type': 'error'})
-
-    session.delete(dealership)
-    session.commit()
-
-    return jsonify({'message': 'Dealership deleted successfully', 'message_type': 'success'})
-
-
+@app.route('/dealerships', methods=['DELETE'])
+def delete_dealerships():
+    if request.method == 'DELETE':
+        longitude = request.args.get('longitude')
+        latitude = request.args.get('latitude')
+        dealership = session.query(Dealership).filter(Dealership.longitude == longitude, Dealership.latitude == latitude).first()
+        if dealership:
+            session.delete(dealership)
+            session.commit()
+            return jsonify({'message': 'Dealership deleted successfully', 'message_type': 'success'})
+        else:
+            return jsonify({'message': 'Dealership not found', 'message_type': 'error'})
+    else:
+        return jsonify({'message': 'Invalid request', 'message_type': 'error'})
 
 if __name__ == '__main__':
     app.run()

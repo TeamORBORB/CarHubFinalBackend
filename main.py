@@ -55,6 +55,10 @@ def activate_job():
 def ds():
     return render_template("ds.html")
 
+@app.route('/dealership_delete/')  
+def ds2():
+    return render_template("ds2.html")
+
 # get all dealerships
 @app.route('/dealerships/')  
 def ds_db():
